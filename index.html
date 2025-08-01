@@ -1,97 +1,62 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Birthday Portal</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Birthday Portal - Start</title>
   <style>
     body {
       margin: 0;
       font-family: 'Segoe UI', sans-serif;
-      background: linear-gradient(to bottom, #ffe6f0, #ffe);
+      background: linear-gradient(to bottom, #fff0f5, #ffe);
       color: #333;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
       text-align: center;
+      padding: 20px;
     }
-    .container {
-      padding: 40px;
+    img {
+      max-width: 300px;
+      border-radius: 16px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+      margin-bottom: 30px;
     }
-    .hidden {
-      display: none;
+    p {
+      font-size: 1.2rem;
+      font-weight: bold;
+      margin-bottom: 30px;
     }
     button {
       padding: 12px 24px;
-      margin: 10px;
       font-size: 16px;
       background-color: #ff69b4;
       color: white;
       border: none;
       border-radius: 8px;
       cursor: pointer;
+      transition: background 0.3s;
     }
-    img {
-      max-width: 300px;
-      margin-top: 20px;
-      border-radius: 16px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-    }
-    audio {
-      margin-top: 20px;
+    button:hover {
+      background-color: #ff1493;
     }
   </style>
 </head>
 <body>
-  <div class="container" id="welcome">
-    <img src="526674308_1126225259351364_4167925685499018189_n_.jpg" alt="Birthday Girl">
-    <p><strong>YOU'RE ONLY AUTHORIZED TO ENTER IF YOU IDENTIFY AS THIS ABOVE CREATURE</strong></p>
-    <button onclick="startExperience()">I IDENTIFY MYSELF AS THIS :)</button>
-  </div>
 
-  <div class="container hidden" id="question">
-    <h2>What's your birthday mood today?</h2>
-    <button onclick="showResult('chill')">🧘‍♀️ Chill</button>
-    <button onclick="showResult('party')">🎉 Party Mode</button>
-    <button onclick="showResult('cake')">🍰 Just Cake & Sleep</button>
-  </div>
+  <!-- Creature Image -->
+  <img src="b38453bc-1bf0-4907-9535-6312836229dc.png" alt="Birthday Creature">
 
-  <div class="container hidden" id="result">
-    <h2 id="result-text"></h2>
-    <img id="result-img" src="" alt="Mood Image">
-    <audio id="result-audio" controls autoplay></audio>
-  </div>
+  <!-- Message -->
+  <p>YOU'RE ONLY AUTHORIZED TO ENTER IF YOU IDENTIFY AS THIS ABOVE CREATURE</p>
 
-  <script>
-    function startExperience() {
-      document.getElementById('welcome').classList.add('hidden');
-      document.getElementById('question').classList.remove('hidden');
-    }
+  <!-- Start Button -->
+  <a href="question1.html">
+    <button>I IDENTIFY MYSELF AS THIS :)</button>
+  </a>
 
-    function showResult(mood) {
-      const texts = {
-        chill: "Relax and vibe, it's your day!",
-        party: "Let's turn up and celebrate you!",
-        cake: "No stress, just cake and comfy vibes!"
-      };
-
-      const images = {
-        chill: "chill.jpg",
-        party: "party.jpg",
-        cake: "cake.jpg"
-      };
-
-      const audios = {
-        chill: "chill.mp3",
-        party: "party.mp3",
-        cake: "cake.mp3"
-      };
-
-      document.getElementById('question').classList.add('hidden');
-      document.getElementById('result').classList.remove('hidden');
-
-      document.getElementById('result-text').innerText = texts[mood];
-      document.getElementById('result-img').src = images[mood];
-      document.getElementById('result-audio').src = audios[mood];
-    }
-  </script>
 </body>
 </html>
 
