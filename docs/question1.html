@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Birthday Page</title>
   <style>
     body {
@@ -40,8 +40,9 @@
     .balloon {
       width: 50px;
       position: absolute;
-      top: 10px;
+      top: 20px;
       animation: float 6s ease-in-out infinite;
+      z-index: 1;
     }
 
     .balloon1 { left: 10%; animation-delay: 0s; }
@@ -59,7 +60,8 @@
     #cakeArea {
       position: relative;
       display: inline-block;
-      margin-top: 80px;
+      margin-top: 100px;
+      z-index: 2;
     }
 
     #cake {
@@ -68,7 +70,7 @@
 
     #candleContainer {
       position: absolute;
-      top: -60px;
+      bottom: 220px;
       left: 50%;
       transform: translateX(-50%);
       width: 30px;
@@ -103,8 +105,9 @@
   <div id="message2">well well well , you're now 18 huh ?</div>
   <div id="message3">let's do the ceremony🔥</div>
 
-  <button id="startBtn" class="hidden">alr8</button>
+  <button id="startBtn">alr8</button>
 
+  <!-- Balloons -->
   <img src="balloon.png" class="balloon balloon1 hidden">
   <img src="balloon.png" class="balloon balloon2 hidden">
   <img src="balloon.png" class="balloon balloon3 hidden">
@@ -112,14 +115,16 @@
   <img src="balloon.png" class="balloon balloon5 hidden">
   <img src="balloon.png" class="balloon balloon6 hidden">
 
+  <!-- Cake & Candle -->
   <div id="cakeArea" class="hidden">
+    <img src="cake.png" id="cake" />
     <div id="candleContainer">
       <img src="candle.png" id="candle" />
       <div id="flame"></div>
     </div>
-    <img src="cake.png" id="cake" />
   </div>
 
+  <!-- Buttons and Messages -->
   <button id="lightBtn" class="hidden">light the candle</button>
   <div id="message4">blow on your screen</div>
   <div id="message5">r u serious ? lol</div>
