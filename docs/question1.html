@@ -6,152 +6,110 @@
   <title>Birthday Ceremony</title>
   <style>
     body {
-      margin: 0;
-      padding: 0;
       background-color: #FF8DA1;
       font-family: 'Comic Sans MS', cursive, sans-serif;
-      color: white;
       text-align: center;
+      margin: 0;
       overflow: hidden;
     }
 
-    .hidden {
+    .container {
+      padding: 20px;
+      position: relative;
+    }
+
+    .cake-container {
+      position: relative;
+      display: inline-block;
+      margin-top: 60px;
+    }
+
+    .cake {
+      width: 250px;
+    }
+
+    .candle-container {
+      position: absolute;
+      top: -70px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 30px;
+    }
+
+    .candle {
+      width: 30px;
+    }
+
+    .flame {
+      position: absolute;
+      top: -30px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 20px;
       display: none;
+    }
+
+    button {
+      margin-top: 20px;
+      padding: 10px 24px;
+      background-color: white;
+      color: #ff4081;
+      font-size: 18px;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
     }
 
     .balloon {
       position: absolute;
-      width: 60px;
+      width: 80px;
       top: 20px;
       animation: float 6s ease-in-out infinite;
     }
 
+    .balloon-left {
+      left: 20px;
+    }
+
+    .balloon-right {
+      right: 20px;
+    }
+
     @keyframes float {
-      0% { transform: translateY(0px); }
+      0% { transform: translateY(0); }
       50% { transform: translateY(-20px); }
-      100% { transform: translateY(0px); }
-    }
-
-    #cake {
-      width: 250px;
-      margin: 20px auto 0;
-      display: none;
-    }
-
-    #candleContainer {
-      position: relative;
-      width: 30px;
-      margin: 0 auto;
-      display: none;
-    }
-
-    #candle {
-      width: 100%;
-    }
-
-    #flame {
-      position: absolute;
-      top: -40px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 25px;
-      display: none;
-    }
-
-    .btn {
-      padding: 10px 20px;
-      margin: 20px;
-      font-size: 18px;
-      background-color: white;
-      color: #FF8DA1;
-      border: none;
-      border-radius: 12px;
-      cursor: pointer;
-      font-family: 'Comic Sans MS', cursive, sans-serif;
+      100% { transform: translateY(0); }
     }
   </style>
 </head>
 <body>
-  <h2 id="msg1">So you agree, huh😏</h2>
-  <h2 id="msg2" class="hidden">well well well , you're now 18 huh ?</h2>
-  <h2 id="msg3" class="hidden">let's do the ceremony🔥</h2>
-  <button id="btnStart" class="btn hidden">alr8</button>
+  <div class="container">
+    <h1 class="message">let's do the ceremony🔥</h1>
 
-  <img src="balloons.png" class="balloon hidden" style="left: 10%;">
-  <img src="balloons.png" class="balloon hidden" style="left: 25%;">
-  <img src="balloons.png" class="balloon hidden" style="left: 40%;">
-  <img src="balloons.png" class="balloon hidden" style="left: 55%;">
-  <img src="balloons.png" class="balloon hidden" style="left: 70%;">
-  <img src="balloons.png" class="balloon hidden" style="left: 85%;">
+    <!-- Balloons -->
+    <img src="balloons.png" class="balloon balloon-left">
+    <img src="balloons.png" class="balloon balloon-right">
 
-  <img src="cake.png" id="cake">
+    <!-- Cake -->
+    <div class="cake-container">
+      <img src="cake.png" id="cake" class="cake">
 
-  <div id="candleContainer">
-    <img src="candle.png" id="candle">
-    <img src="flame.gif" id="flame">
+      <!-- Candle & Flame -->
+      <div id="candleContainer" class="candle-container">
+        <img src="candle.png" id="candle" class="candle">
+        <img src="flame.gif" id="flame" class="flame">
+      </div>
+    </div>
+
+    <!-- Light Candle Button -->
+    <button id="lightBtn" onclick="lightCandle()">light the candle</button>
   </div>
 
-  <button id="btnLight" class="btn hidden">light the candle</button>
-  <h2 id="msg4" class="hidden">blow on your screen</h2>
-  <h2 id="msg5" class="hidden">r u serious ? lol</h2>
-  <button id="btnBlow" class="btn hidden">blow the candle</button>
-  <button id="btnNext" class="btn hidden">lessgo</button>
-
   <script>
-    const delay = (ms) => new Promise(res => setTimeout(res, ms));
-
-    async function startSequence() {
-      await delay(4000);
-      document.getElementById('msg1').style.display = 'none';
-      document.getElementById('msg2').classList.remove('hidden');
-
-      await delay(5000);
-      document.getElementById('msg2').style.display = 'none';
-      document.getElementById('msg3').classList.remove('hidden');
-
-      await delay(4000);
-      document.getElementById('msg3').style.display = 'none';
-      document.getElementById('btnStart').classList.remove('hidden');
+    function lightCandle() {
+      document.getElementById("flame").style.display = "block";
+      document.getElementById("lightBtn").style.display = "none";
     }
-
-    document.getElementById('btnStart').onclick = () => {
-      document.getElementById('btnStart').style.display = 'none';
-      showBalloonsCake();
-    };
-
-    function showBalloonsCake() {
-      document.querySelectorAll('.balloon').forEach(b => b.classList.remove('hidden'));
-      document.getElementById('cake').style.display = 'block';
-      document.getElementById('candleContainer').style.display = 'block';
-      document.getElementById('btnLight').classList.remove('hidden');
-    }
-
-    document.getElementById('btnLight').onclick = () => {
-      document.getElementById('flame').style.display = 'block';
-      document.getElementById('btnLight').style.display = 'none';
-      setTimeout(() => {
-        document.getElementById('msg4').classList.remove('hidden');
-        setTimeout(() => {
-          document.getElementById('msg4').style.display = 'none';
-          document.getElementById('msg5').classList.remove('hidden');
-          setTimeout(() => {
-            document.getElementById('msg5').style.display = 'none';
-            document.getElementById('btnBlow').classList.remove('hidden');
-          }, 3000);
-        }, 4000);
-      }, 1000);
-    };
-
-    document.getElementById('btnBlow').onclick = () => {
-      document.getElementById('flame').style.display = 'none';
-      document.getElementById('btnBlow').style.display = 'none';
-      document.getElementById('cake').style.display = 'none';
-      document.getElementById('candleContainer').style.display = 'none';
-      document.querySelectorAll('.balloon').forEach(b => b.style.display = 'none');
-      document.getElementById('btnNext').classList.remove('hidden');
-    };
-
-    startSequence();
   </script>
 </body>
 </html>
