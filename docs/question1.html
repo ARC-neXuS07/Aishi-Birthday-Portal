@@ -3,148 +3,145 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Ceremony</title>
+  <title>Page 2</title>
   <style>
     body {
       margin: 0;
-      padding: 0;
-      background-color: #FF8DA1;
       font-family: 'Comic Sans MS', cursive, sans-serif;
-      overflow: hidden;
+      background-color: #FF8DA1;
       text-align: center;
-      color: white;
+      overflow: hidden;
     }
-
+    .hidden {
+      display: none;
+    }
     .message {
       font-size: 24px;
-      margin-top: 20px;
+      color: white;
+      margin-top: 40px;
       opacity: 0;
       transition: opacity 1s ease-in-out;
     }
-
     .button {
-      margin: 20px auto;
+      margin-top: 20px;
       padding: 12px 24px;
       font-size: 18px;
       background-color: white;
-      color: #FF8DA1;
       border: none;
       border-radius: 12px;
       cursor: pointer;
-      font-family: 'Comic Sans MS', cursive, sans-serif;
+      font-family: 'Comic Sans MS';
     }
-
-    .balloons {
+    #balloons {
       position: absolute;
-      top: 0;
+      top: 20px;
       left: 50%;
       transform: translateX(-50%);
-      display: none;
-      animation: float 10s infinite linear;
+      width: 100px;
+      z-index: 1;
     }
-
-    .cake {
-      width: 200px;
+    #cake {
+      position: relative;
+      width: 250px;
+      margin-top: 100px;
+      z-index: 2;
+    }
+    #candleContainer {
+      position: absolute;
+      top: 140px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 3;
+    }
+    #candle {
+      width: 30px;
+      display: block;
       margin: 0 auto;
-      display: none;
     }
-
-    .candle {
+    #flame {
       width: 20px;
-      margin: 0 auto;
-      display: none;
-    }
-
-    .flame {
-      width: 10px;
-      height: 20px;
-      background: yellow;
-      border-radius: 50%;
-      margin: 0 auto;
-      margin-top: -30px;
-      animation: flicker 0.3s infinite alternate;
-    }
-
-    @keyframes flicker {
-      from { opacity: 1; }
-      to { opacity: 0.6; }
-    }
-
-    @keyframes float {
-      0% { transform: translateX(-50%) translateY(0); }
-      100% { transform: translateX(-50%) translateY(-50px); }
+      position: absolute;
+      top: -30px;
+      left: 50%;
+      transform: translateX(-50%);
     }
   </style>
 </head>
 <body>
+
   <div id="msg1" class="message">So you agree, huh😏</div>
   <div id="msg2" class="message">well well well , you're now 18 huh ?</div>
   <div id="msg3" class="message">let's do the ceremony🔥</div>
+  <button id="startBtn" class="button hidden">alr8</button>
 
-  <button id="alr8Btn" class="button" onclick="startCeremony()" style="display:none;">alr8</button>
+  <img src="balloons.png" id="balloons" class="hidden">
+  <img src="cake.png" id="cake" class="hidden">
 
- <img src="balloons.png" id="balloons" class="balloons" style="display:none;">
-<img src="cake.png" id="cake" class="cake" style="display:none;">
-<div id="candleContainer">
-  <img src="candle.png" id="candle" class="candle" style="display:none;">
-  <img src="flame.gif" id="flame" class="flame" style="display:none;">
-</div>
+  <div id="candleContainer" class="hidden">
+    <img src="candle.png" id="candle">
+    <img src="flame.gif" id="flame" class="hidden">
+  </div>
 
-
-  <button id="lightBtn" class="button" onclick="lightCandle()" style="display:none;">light the candle</button>
-
+  <button id="lightBtn" class="button hidden">light the candle</button>
   <div id="msg4" class="message">blow on your screen</div>
   <div id="msg5" class="message">r u serious ? lol</div>
-
-  <button id="blowBtn" class="button" onclick="blowCandle()" style="display:none;">blow the candle</button>
-  <button id="lessgoBtn" class="button" onclick="lessgo()" style="display:none;">lessgo</button>
+  <button id="blowBtn" class="button hidden">blow the candle</button>
+  <button id="lessgoBtn" class="button hidden">lessgo</button>
 
   <script>
-    // Initial sequence
-    setTimeout(() => document.getElementById('msg1').style.opacity = 1, 500);
-    setTimeout(() => document.getElementById('msg1').style.opacity = 0, 4500);
-
-    setTimeout(() => document.getElementById('msg2').style.opacity = 1, 5000);
-    setTimeout(() => document.getElementById('msg2').style.opacity = 0, 10000);
-
-    setTimeout(() => document.getElementById('msg3').style.opacity = 1, 10500);
-    setTimeout(() => document.getElementById('msg3').style.opacity = 0, 14500);
-
-    setTimeout(() => document.getElementById('alr8Btn').style.display = 'inline-block', 15000);
-
-    function startCeremony() {
-      document.getElementById('alr8Btn').style.display = 'none';
-      document.getElementById('balloons').style.display = 'block';
-      document.getElementById('cake').style.display = 'block';
-      document.getElementById('candle').style.display = 'block';
+    function fadeIn(id, delay, duration = 1000) {
       setTimeout(() => {
-        document.getElementById('lightBtn').style.display = 'inline-block';
-      }, 1000);
+        const el = document.getElementById(id);
+        el.style.opacity = 1;
+      }, delay);
+      setTimeout(() => {
+        document.getElementById(id).style.display = 'none';
+      }, delay + duration);
     }
 
-    function lightCandle() {
+    window.onload = () => {
+      fadeIn('msg1', 0, 4000);
+      fadeIn('msg2', 4000, 5000);
+      fadeIn('msg3', 9000, 4000);
+
+      setTimeout(() => {
+        document.getElementById('startBtn').classList.remove('hidden');
+      }, 13000);
+    }
+
+    document.getElementById('startBtn').onclick = () => {
+      document.getElementById('startBtn').style.display = 'none';
+      document.getElementById('balloons').classList.remove('hidden');
+      document.getElementById('cake').classList.remove('hidden');
+      document.getElementById('candleContainer').classList.remove('hidden');
+      document.getElementById('lightBtn').classList.remove('hidden');
+    }
+
+    document.getElementById('lightBtn').onclick = () => {
+      document.getElementById('flame').classList.remove('hidden');
       document.getElementById('lightBtn').style.display = 'none';
-      document.getElementById('flame').style.display = 'block';
-      setTimeout(() => document.getElementById('msg4').style.opacity = 1, 1000);
-      setTimeout(() => document.getElementById('msg4').style.opacity = 0, 5000);
-      setTimeout(() => document.getElementById('msg5').style.opacity = 1, 5500);
-      setTimeout(() => document.getElementById('msg5').style.opacity = 0, 8500);
-      setTimeout(() => document.getElementById('blowBtn').style.display = 'inline-block', 9000);
+      setTimeout(() => {
+        document.getElementById('msg4').style.opacity = 1;
+      }, 1000);
+      setTimeout(() => {
+        document.getElementById('msg4').style.display = 'none';
+        document.getElementById('msg5').style.opacity = 1;
+      }, 5000);
+      setTimeout(() => {
+        document.getElementById('msg5').style.display = 'none';
+        document.getElementById('blowBtn').classList.remove('hidden');
+      }, 8000);
     }
 
-    function blowCandle() {
-      document.getElementById('blowBtn').style.display = 'none';
+    document.getElementById('blowBtn').onclick = () => {
       document.getElementById('flame').style.display = 'none';
       document.getElementById('cake').style.display = 'none';
-      document.getElementById('candle').style.display = 'none';
+      document.getElementById('candleContainer').style.display = 'none';
       document.getElementById('balloons').style.display = 'none';
-      document.getElementById('lessgoBtn').style.display = 'inline-block';
-    }
-
-    function lessgo() {
-      // Redirect or show something new
-      alert("Let's go to the next page!");
+      document.getElementById('blowBtn').style.display = 'none';
+      document.getElementById('lessgoBtn').classList.remove('hidden');
     }
   </script>
+
 </body>
 </html>
