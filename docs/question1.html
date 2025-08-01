@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Birthday Page</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Birthday Page 2</title>
   <style>
     body {
       margin: 0;
@@ -11,164 +11,176 @@
       background-color: #FF8DA1;
       font-family: "Comic Sans MS", cursive, sans-serif;
       text-align: center;
-      overflow-x: hidden;
+      overflow: hidden;
     }
-
-    #message1, #message2, #message3, #message4, #message5 {
+    .message {
       font-size: 24px;
-      margin-top: 50px;
+      color: white;
+      margin-top: 40px;
       opacity: 0;
-      transition: opacity 1s;
+      transition: opacity 1s ease;
     }
-
-    button {
+    .btn {
+      display: inline-block;
+      margin: 20px auto;
       padding: 12px 24px;
       font-size: 18px;
-      margin-top: 30px;
-      border-radius: 12px;
-      border: none;
-      background-color: white;
+      background: white;
       color: #FF8DA1;
+      border: none;
+      border-radius: 12px;
       cursor: pointer;
       font-family: "Comic Sans MS", cursive, sans-serif;
     }
+    .hidden { display: none; }
 
-    .hidden {
-      display: none;
-    }
-
+    /* Balloons */
     .balloon {
-      width: 50px;
       position: absolute;
-      top: 20px;
-      animation: float 6s ease-in-out infinite;
+      width: 60px;
+      top: 10px;
+      animation: float 5s ease-in-out infinite;
       z-index: 1;
     }
-
-    .balloon1 { left: 10%; animation-delay: 0s; }
-    .balloon2 { left: 20%; animation-delay: 1s; }
-    .balloon3 { left: 30%; animation-delay: 2s; }
-    .balloon4 { right: 30%; animation-delay: 1.5s; }
-    .balloon5 { right: 20%; animation-delay: 0.5s; }
-    .balloon6 { right: 10%; animation-delay: 2.5s; }
-
+    .balloon1 { left: 5%; animation-delay: 0s; }
+    .balloon2 { left: 20%; animation-delay: 0.5s; }
+    .balloon3 { left: 35%; animation-delay: 1s; }
+    .balloon4 { left: 50%; animation-delay: 1.5s; }
+    .balloon5 { left: 65%; animation-delay: 2s; }
+    .balloon6 { left: 80%; animation-delay: 2.5s; }
+    .balloon7 { left: 90%; animation-delay: 3s; }
     @keyframes float {
-      0%, 100% { transform: translateY(0); }
+      0%,100% { transform: translateY(0); }
       50% { transform: translateY(-20px); }
     }
 
+    /* Cake & Candle container */
     #cakeArea {
       position: relative;
       display: inline-block;
       margin-top: 100px;
       z-index: 2;
     }
-
     #cake {
       width: 300px;
+      display: block;
     }
-
     #candleContainer {
       position: absolute;
-      bottom: 220px;
+      top: -50px;
       left: 50%;
       transform: translateX(-50%);
       width: 30px;
     }
-
     #candle {
       width: 30px;
+      display: block;
     }
-
     #flame {
-      width: 15px;
-      height: 30px;
-      background: radial-gradient(circle, orange, red);
-      border-radius: 50% 50% 0 0;
       position: absolute;
       top: -25px;
       left: 50%;
       transform: translateX(-50%);
+      width: 15px;
+      height: 30px;
+      background: radial-gradient(circle, orange, red);
+      border-radius: 50% 50% 0 0;
+      animation: flicker 0.3s infinite;
       display: none;
-      animation: flicker 0.2s infinite;
     }
-
     @keyframes flicker {
-      0% { opacity: 1; transform: translateX(-50%) scale(1); }
-      50% { opacity: 0.6; transform: translateX(-50%) scale(1.1); }
-      100% { opacity: 1; transform: translateX(-50%) scale(1); }
+      0% { opacity: 1; }
+      50% { opacity: 0.6; }
+      100% { opacity: 1; }
     }
   </style>
 </head>
 <body>
-  <div id="message1">So you agree, huh😏</div>
-  <div id="message2">well well well , you're now 18 huh ?</div>
-  <div id="message3">let's do the ceremony🔥</div>
+  <!-- 1. Initial Messages -->
+  <div id="msg1" class="message">So you agree, huh😏</div>
+  <div id="msg2" class="message">well well well , you're now 18 huh ?</div>
+  <div id="msg3" class="message">let's do the ceremony🔥</div>
 
-  <button id="startBtn">alr8</button>
+  <!-- 4. Start Button (hidden until msg3 ends) -->
+  <button id="startBtn" class="btn hidden">alr8</button>
 
-  <!-- Balloons -->
-  <img src="balloon.png" class="balloon balloon1 hidden">
-  <img src="balloon.png" class="balloon balloon2 hidden">
-  <img src="balloon.png" class="balloon balloon3 hidden">
-  <img src="balloon.png" class="balloon balloon4 hidden">
-  <img src="balloon.png" class="balloon balloon5 hidden">
-  <img src="balloon.png" class="balloon balloon6 hidden">
+  <!-- 6. Balloons (hidden until start) -->
+  <img src="balloons.png" class="balloon balloon1 hidden" alt="Balloon">
+  <img src="balloons.png" class="balloon balloon2 hidden" alt="Balloon">
+  <img src="balloons.png" class="balloon balloon3 hidden" alt="Balloon">
+  <img src="balloons.png" class="balloon balloon4 hidden" alt="Balloon">
+  <img src="balloons.png" class="balloon balloon5 hidden" alt="Balloon">
+  <img src="balloons.png" class="balloon balloon6 hidden" alt="Balloon">
+  <img src="balloons.png" class="balloon balloon7 hidden" alt="Balloon">
 
-  <!-- Cake & Candle -->
+  <!-- 7 & 8. Cake & Candle (hidden until start) -->
   <div id="cakeArea" class="hidden">
-    <img src="cake.png" id="cake" />
+    <img src="cake.png" id="cake" alt="Cake">
     <div id="candleContainer">
-      <img src="candle.png" id="candle" />
+      <img src="candle.png" id="candle" alt="Candle">
       <div id="flame"></div>
     </div>
   </div>
 
-  <!-- Buttons and Messages -->
-  <button id="lightBtn" class="hidden">light the candle</button>
-  <div id="message4">blow on your screen</div>
-  <div id="message5">r u serious ? lol</div>
-  <button id="blowBtn" class="hidden">blow the candle</button>
-  <button id="finalBtn" class="hidden">lessgo</button>
+  <!-- 9. Light the candle button -->
+  <button id="lightBtn" class="btn hidden">light the candle</button>
+
+  <!-- 11 & 12. Blow messages -->
+  <div id="msg4" class="message">blow on your screen</div>
+  <div id="msg5" class="message">r u serious ? lol</div>
+
+  <!-- 13. Blow the candle button -->
+  <button id="blowBtn" class="btn hidden">blow the candle</button>
+
+  <!-- 15. Final button -->
+  <button id="finalBtn" class="btn hidden">lessgo</button>
 
   <script>
-    window.onload = () => {
-      setTimeout(() => document.getElementById('message1').style.opacity = 1, 0);
-      setTimeout(() => document.getElementById('message1').style.opacity = 0, 4000);
-
-      setTimeout(() => document.getElementById('message2').style.opacity = 1, 4500);
-      setTimeout(() => document.getElementById('message2').style.opacity = 0, 9500);
-
-      setTimeout(() => document.getElementById('message3').style.opacity = 1, 10000);
+    // Function to show and optionally hide messages
+    const show = (id, delay, duration=0) => {
       setTimeout(() => {
-        document.getElementById('message3').style.opacity = 0;
-        document.getElementById('startBtn').classList.remove('hidden');
-      }, 14000);
+        const el = document.getElementById(id);
+        el.style.opacity = 1;
+        if (duration) setTimeout(() => el.style.opacity = 0, duration);
+      }, delay);
     };
 
+    window.onload = () => {
+      // 1. Show msg1 for 4s
+      show('msg1', 0, 4000);
+      // 2. Show msg2 for 5s starting at 5s
+      show('msg2', 5000, 5000);
+      // 3. Show msg3 for 4s starting at 11s
+      show('msg3', 11000, 4000);
+      // 4. Reveal start button at 15s
+      setTimeout(() => document.getElementById('startBtn').classList.remove('hidden'), 15000);
+    };
+
+    // Start ceremony: balloons, cake & show light button
     document.getElementById('startBtn').onclick = () => {
+      document.getElementById('startBtn').classList.add('hidden');
       document.querySelectorAll('.balloon').forEach(b => b.classList.remove('hidden'));
       document.getElementById('cakeArea').classList.remove('hidden');
-      document.getElementById('startBtn').classList.add('hidden');
       document.getElementById('lightBtn').classList.remove('hidden');
     };
 
+    // Light candle: show flame and blow messages
     document.getElementById('lightBtn').onclick = () => {
-      document.getElementById('flame').style.display = 'block';
       document.getElementById('lightBtn').classList.add('hidden');
-      setTimeout(() => document.getElementById('message4').style.opacity = 1, 1000);
-      setTimeout(() => document.getElementById('message4').style.opacity = 0, 5000);
-      setTimeout(() => document.getElementById('message5').style.opacity = 1, 5500);
-      setTimeout(() => {
-        document.getElementById('message5').style.opacity = 0;
-        document.getElementById('blowBtn').classList.remove('hidden');
-      }, 8500);
+      document.getElementById('flame').style.display = 'block';
+      // 11. Show blow message
+      show('msg4', 1000, 4000);
+      // 12. Show r u serious
+      show('msg5', 6000, 3000);
+      // 13. Reveal blow button at 10s
+      setTimeout(() => document.getElementById('blowBtn').classList.remove('hidden'), 10000);
     };
 
+    // Blow candle: hide elements and show final
     document.getElementById('blowBtn').onclick = () => {
+      document.getElementById('blowBtn').classList.add('hidden');
       document.getElementById('flame').style.display = 'none';
       document.getElementById('cakeArea').classList.add('hidden');
-      document.getElementById('blowBtn').classList.add('hidden');
       document.querySelectorAll('.balloon').forEach(b => b.classList.add('hidden'));
       document.getElementById('finalBtn').classList.remove('hidden');
     };
