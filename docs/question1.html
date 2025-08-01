@@ -3,145 +3,147 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Birthday Ceremony</title>
+  <title>Ceremony</title>
   <style>
     body {
       margin: 0;
-      font-family: 'Comic Sans MS', cursive, sans-serif;
+      padding: 0;
       background-color: #FF8DA1;
+      font-family: 'Comic Sans MS', cursive, sans-serif;
+      overflow: hidden;
       text-align: center;
-      overflow-x: hidden;
+      color: white;
     }
+
     .message {
       font-size: 24px;
-      color: white;
-      margin-top: 30px;
+      margin-top: 20px;
       opacity: 0;
-      transition: opacity 2s ease-in-out;
+      transition: opacity 1s ease-in-out;
     }
-    .visible {
-      opacity: 1;
-    }
-    .btn {
+
+    .button {
+      margin: 20px auto;
       padding: 12px 24px;
+      font-size: 18px;
       background-color: white;
+      color: #FF8DA1;
       border: none;
       border-radius: 12px;
-      font-size: 16px;
-      margin-top: 20px;
       cursor: pointer;
       font-family: 'Comic Sans MS', cursive, sans-serif;
     }
-    #balloons {
+
+    .balloons {
       position: absolute;
       top: 0;
-      left: 10px;
-      width: 80px;
-      animation: float 6s ease-in-out infinite;
-    }
-    #balloons-right {
-      position: absolute;
-      top: 0;
-      right: 10px;
-      width: 80px;
-      animation: float 6s ease-in-out infinite;
-    }
-    @keyframes float {
-      0% { transform: translateY(0); }
-      50% { transform: translateY(-20px); }
-      100% { transform: translateY(0); }
-    }
-    #cake {
-      width: 250px;
-      margin-top: 80px;
-    }
-    #candleContainer {
-      position: relative;
-      width: 100px;
-      height: 100px;
-      margin: auto;
-      margin-top: -80px;
-    }
-    #candle {
-      position: absolute;
-      top: -60px;
       left: 50%;
       transform: translateX(-50%);
-      width: 20px;
-    }
-    .flame {
-      position: absolute;
-      top: -80px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 16px;
-      height: 24px;
-      background: url('flame.gif') no-repeat center center / cover;
       display: none;
+      animation: float 10s infinite linear;
+    }
+
+    .cake {
+      width: 200px;
+      margin: 0 auto;
+      display: none;
+    }
+
+    .candle {
+      width: 20px;
+      margin: 0 auto;
+      display: none;
+    }
+
+    .flame {
+      width: 10px;
+      height: 20px;
+      background: yellow;
+      border-radius: 50%;
+      margin: 0 auto;
+      margin-top: -30px;
+      animation: flicker 0.3s infinite alternate;
+    }
+
+    @keyframes flicker {
+      from { opacity: 1; }
+      to { opacity: 0.6; }
+    }
+
+    @keyframes float {
+      0% { transform: translateX(-50%) translateY(0); }
+      100% { transform: translateX(-50%) translateY(-50px); }
     }
   </style>
 </head>
 <body>
+  <div id="msg1" class="message">So you agree, huh😏</div>
+  <div id="msg2" class="message">well well well , you're now 18 huh ?</div>
+  <div id="msg3" class="message">let's do the ceremony🔥</div>
 
-  <img src="balloons.png" id="balloons">
-  <img src="balloons.png" id="balloons-right">
+  <button id="alr8Btn" class="button" onclick="startCeremony()" style="display:none;">alr8</button>
 
-  <div class="message" id="msg1">So you agree, huh😏</div>
-  <div class="message" id="msg2">well well well , you're now 18 huh ?</div>
-  <div class="message" id="msg3">let's do the ceremony🔥</div>
-
-  <button class="btn" id="alr8Btn" onclick="startCeremony()">alr8</button>
-
-  <img src="cake.png" id="cake" style="display: none;">
+  <img src="balloons.png" id="balloons" class="balloons">
+  <img src="cake.png" id="cake" class="cake">
   <div id="candleContainer">
-    <img src="candle.png" id="candle" style="display: none;">
-    <div id="flame" class="flame"></div>
+    <img src="candle.png" id="candle" class="candle">
+    <div id="flame" class="flame" style="display:none;"></div>
   </div>
 
-  <button class="btn" id="lightBtn" onclick="lightCandle()" style="display: none;">light the candle</button>
+  <button id="lightBtn" class="button" onclick="lightCandle()" style="display:none;">light the candle</button>
 
-  <div class="message" id="msg4">blow on your screen</div>
-  <div class="message" id="msg5">r u serious ? lol</div>
+  <div id="msg4" class="message">blow on your screen</div>
+  <div id="msg5" class="message">r u serious ? lol</div>
 
-  <button class="btn" id="blowBtn" onclick="blowCandle()" style="display: none;">blow the candle</button>
-
-  <button class="btn" id="lessgoBtn" style="display: none;">lessgo</button>
+  <button id="blowBtn" class="button" onclick="blowCandle()" style="display:none;">blow the candle</button>
+  <button id="lessgoBtn" class="button" onclick="lessgo()" style="display:none;">lessgo</button>
 
   <script>
-    window.onload = () => {
-      setTimeout(() => document.getElementById('msg1').classList.add('visible'), 0);
-      setTimeout(() => document.getElementById('msg1').classList.remove('visible'), 4000);
-      setTimeout(() => document.getElementById('msg2').classList.add('visible'), 4000);
-      setTimeout(() => document.getElementById('msg2').classList.remove('visible'), 9000);
-      setTimeout(() => document.getElementById('msg3').classList.add('visible'), 9000);
-      setTimeout(() => document.getElementById('msg3').classList.remove('visible'), 13000);
-    }
+    // Initial sequence
+    setTimeout(() => document.getElementById('msg1').style.opacity = 1, 500);
+    setTimeout(() => document.getElementById('msg1').style.opacity = 0, 4500);
+
+    setTimeout(() => document.getElementById('msg2').style.opacity = 1, 5000);
+    setTimeout(() => document.getElementById('msg2').style.opacity = 0, 10000);
+
+    setTimeout(() => document.getElementById('msg3').style.opacity = 1, 10500);
+    setTimeout(() => document.getElementById('msg3').style.opacity = 0, 14500);
+
+    setTimeout(() => document.getElementById('alr8Btn').style.display = 'inline-block', 15000);
 
     function startCeremony() {
       document.getElementById('alr8Btn').style.display = 'none';
+      document.getElementById('balloons').style.display = 'block';
       document.getElementById('cake').style.display = 'block';
       document.getElementById('candle').style.display = 'block';
-      document.getElementById('lightBtn').style.display = 'inline-block';
+      setTimeout(() => {
+        document.getElementById('lightBtn').style.display = 'inline-block';
+      }, 1000);
     }
 
     function lightCandle() {
-      document.getElementById('flame').style.display = 'block';
       document.getElementById('lightBtn').style.display = 'none';
-      setTimeout(() => document.getElementById('msg4').classList.add('visible'), 1000);
-      setTimeout(() => document.getElementById('msg4').classList.remove('visible'), 5000);
-      setTimeout(() => document.getElementById('msg5').classList.add('visible'), 5000);
-      setTimeout(() => document.getElementById('msg5').classList.remove('visible'), 8000);
-      setTimeout(() => document.getElementById('blowBtn').style.display = 'inline-block', 8000);
+      document.getElementById('flame').style.display = 'block';
+      setTimeout(() => document.getElementById('msg4').style.opacity = 1, 1000);
+      setTimeout(() => document.getElementById('msg4').style.opacity = 0, 5000);
+      setTimeout(() => document.getElementById('msg5').style.opacity = 1, 5500);
+      setTimeout(() => document.getElementById('msg5').style.opacity = 0, 8500);
+      setTimeout(() => document.getElementById('blowBtn').style.display = 'inline-block', 9000);
     }
 
     function blowCandle() {
+      document.getElementById('blowBtn').style.display = 'none';
       document.getElementById('flame').style.display = 'none';
       document.getElementById('cake').style.display = 'none';
       document.getElementById('candle').style.display = 'none';
-      document.getElementById('blowBtn').style.display = 'none';
+      document.getElementById('balloons').style.display = 'none';
       document.getElementById('lessgoBtn').style.display = 'inline-block';
     }
-  </script>
 
+    function lessgo() {
+      // Redirect or show something new
+      alert("Let's go to the next page!");
+    }
+  </script>
 </body>
 </html>
