@@ -171,6 +171,55 @@
       font-size: 24px;
       z-index: 100;
     }
+    
+    /* Confetti container */
+    .confetti-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1000;
+      display: none;
+    }
+    
+    .confetti {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      background-color: #f00;
+      opacity: 0.7;
+    }
+    
+    /* Redirect message */
+    .redirect-message {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(255, 141, 161, 0.9);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      z-index: 2000;
+      opacity: 0;
+      transition: opacity 1s ease;
+      pointer-events: none;
+    }
+    
+    .redirect-message.show {
+      opacity: 1;
+      pointer-events: all;
+    }
+    
+    .redirect-message h2 {
+      color: white;
+      font-size: 36px;
+      margin-bottom: 30px;
+    }
   </style>
 </head>
 <body>
@@ -217,6 +266,15 @@
 
   <!-- 15. Final button -->
   <button id="finalBtn" class="btn hidden">lessgo</button>
+  
+  <!-- Confetti container -->
+  <div id="confettiContainer" class="confetti-container"></div>
+  
+  <!-- Redirect message -->
+  <div id="redirectMessage" class="redirect-message">
+    <h2>Get ready for the surprise!</h2>
+    <p>Redirecting to your birthday video...</p>
+  </div>
 
   <script>
     // Function to show and optionally hide messages
@@ -269,6 +327,40 @@
           };
         });
       });
+    }
+
+    // Create confetti effect
+    function createConfetti() {
+      const container = document.getElementById('confettiContainer');
+      container.style.display = 'block';
+      
+      const colors = ['#ff0000', '#00ff00', '#0000ff', '#ffff00', '#ff00ff', '#00ffff'];
+      
+      for (let i = 0; i < 150; i++) {
+        const confetti = document.createElement('div');
+        confetti.className = 'confetti';
+        confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+        confetti.style.left = `${Math.random() * 100}%`;
+        confetti.style.top = `${-10 - Math.random() * 20}%`;
+        confetti.style.transform = `rotate(${Math.random() * 360}deg)`;
+        confetti.style.opacity = Math.random() * 0.5 + 0.5;
+        
+        container.appendChild(confetti);
+        
+        // Animation
+        const animation = confetti.animate([
+          { transform: `translateY(0) rotate(0deg)`, top: `${-10 - Math.random() * 20}%` },
+          { transform: `translateX(${Math.random() * 200 - 100}px) rotate(${360 + Math.random() * 360}deg)`, top: '100%' }
+        ], {
+          duration: 3000 + Math.random() * 3000,
+          easing: 'cubic-bezier(0,0,0.2,1)'
+        });
+        
+        // Remove after animation
+        animation.onfinish = () => {
+          confetti.remove();
+        };
+      }
     }
 
     // Start when all images are loaded
@@ -347,13 +439,23 @@
       }, 1000);
     };
     
-    // Final button action
+    // Final button action - redirect to YouTube
     document.getElementById('finalBtn').onclick = () => {
+      // Hide final button
       hide('finalBtn');
-      // Reset everything for potential replay
+      
+      // Show confetti celebration
+      createConfetti();
+      
+      // Show redirect message
+      const redirectMsg = document.getElementById('redirectMessage');
+      redirectMsg.classList.add('show');
+      
+      // Redirect after 3 seconds
       setTimeout(() => {
-        location.reload();
-      }, 1000);
+        // REPLACE THIS URL WITH YOUR UNLISTED YOUTUBE VIDEO URL
+        window.location.href = "https://youtu.be/K2aJTT29ZdU?si=7RQhLh_eMnZeSPeK";
+      }, 3000);
     };
   </script>
 </body>
